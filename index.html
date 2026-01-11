@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teste de Perfil Comportamental (DISC) - Flex Company</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    body { margin: 0; background: #0b1220; color: #e8eefc; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 18px; }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    p { margin: 6px 0 12px; color: rgba(232,238,252,0.84); line-height: 1.35; }
+    label { display:block; font-weight: 600; margin: 10px 0 6px; }
+    input, select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18); background: rgba(0,0,0,0.18); color: #e8eefc; }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px){ .grid{ grid-template-columns: 1fr; } }
+
+    .q { padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.14); margin: 12px 0; }
+    .q strong { display:block; margin-bottom: 10px; }
+    .scale { display:flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .chip { display:flex; gap:8px; align-items:center; padding:8px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); }
+    .chip input { width:auto; }
+    .muted { font-size: 12px; color: rgba(232,238,252,0.72); }
+
+    .barbox { margin-top: 16px; display:grid; gap: 10px; }
+    .barrow { display:grid; grid-template-columns: 44px 1fr 56px; gap: 10px; align-items:center; }
+    .bar { height: 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.07); overflow: hidden; }
+    .bar > i { display:block; height:100%; width: 0%; background: rgba(140, 200, 255, 0.85); }
+    .pill { display:inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); }
+    .btns { display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
+    button { padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.10); color:#e8eefc; font-weight:700; cursor:pointer; }
+    button:hover { background: rgba(255,255,255,0.14); }
+    .danger { background: rgba(255, 90, 90, 0.18); }
+    .ok { background: rgba(90, 255, 170, 0.14); }
+    .hr { height:1px; background: rgba(255,255,255,0.14); margin: 14px 0; }
+    .tiny { font-size: 11px; color: rgba(232,238,252,0.65); }
+    .top { display:flex; gap:10px; align-items:center; justify-content: space-between; flex-wrap:wrap; }
+    .progress { flex: 1; min-width: 220px; height: 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.07); overflow:hidden; }
+    .progress > i { display:block; height:100%; width:0%; background: rgba(90, 200, 255, 0.85); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div>
+          <h1>Teste de Perfil Comportamental (DISC)</h1>
+          <p class="muted">
+            Escala de 1 a 5: 1 = Discordo totalmente | 5 = Concordo totalmente.
+            <br/>Uso recomendado: autoconhecimento e alinhamento de equipe (não é diagnóstico clínico).
+          </p>
+        </div>
+        <div class="progress" title="Progresso"><i id="prog"></i></div>
+      </div>
+
+      <div class="grid" style="margin-top:10px;">
+        <div>
+          <label>Nome completo</label>
+          <input id="nome" placeholder="Ex.: Patricia Abilio" />
+        </div>
+        <div>
+          <label>Setor / Função</label>
+          <input id="setor" placeholder="Ex.: Comercial / Social Seller" />
+        </div>
+        <div>
+          <label>E-mail (opcional)</label>
+          <input id="email" placeholder="Ex.: nome@empresa.com" />
+        </div>
+        <div>
+          <label>Data</label>
+          <input id="data" type="date" />
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div id="questoes"></div>
+
+      <div class="btns">
+        <button id="btnCalcular" class="ok">Ver meu resultado</button>
+        <button id="btnLimpar" class="danger">Limpar respostas</button>
+      </div>
+
+      <div id="resultado" style="display:none; margin-top:16px;">
+        <div class="hr"></div>
+        <h1>Seu resultado</h1>
+        <p>
+          Perfil predominante: <span class="pill" id="perfilTop"></span>
+          <br/><span class="muted" id="perfilDesc"></span>
+        </p>
+
+        <div class="barbox">
+          <div class="barrow"><strong>D</strong><div class="bar"><i id="barD"></i></div><span id="valD">0</span></div>
+          <div class="barrow"><strong>I</strong><div class="bar"><i id="barI"></i></div><span id="valI">0</span></div>
+          <div class="barrow"><strong>S</strong><div class="bar"><i id="barS"></i></div><span id="valS">0</span></div>
+          <div class="barrow"><strong>C</strong><div class="bar"><i id="barC"></i></div><span id="valC">0</span></div>
+        </div>
+
+        <div class="btns">
+          <button id="btnEnviar">Enviar para a empresa</button>
+          <button id="btnCopiar">Copiar resumo</button>
+        </div>
+
+        <p class="tiny" id="status"></p>
+      </div>
+
+      <p class="tiny">
+        Privacidade: as respostas devem ser usadas para desenvolvimento, não para “rotular” pessoas.
+        Se você for hospedar e coletar dados, avise a equipe de forma transparente.
+      </p>
+    </div>
+  </div>
+
+<script>
+  // ✅ CONFIG: cole aqui a URL do seu Apps Script (Web App) quando criar
+  const ENDPOINT = ""; // ex.: "https://script.google.com/macros/s/XXXX/exec"
+
+  const descricoes = {
+    D: "Dominância: foco em resultado, velocidade, decisão, assertividade. Pode soar direto; brilha em metas e crise.",
+    I: "Influência: energia social, persuasão, comunicação e entusiasmo. Brilha em engajamento; pode dispersar sem estrutura.",
+    S: "Estabilidade: consistência, cooperação, paciência e suporte. Brilha em rotina e cuidado; pode evitar conflito.",
+    C: "Conformidade: precisão, padrões, análise e qualidade. Brilha em processos; pode travar com ambiguidade."
+  };
+
+  // 40 itens (10 por dimensão). Alguns são invertidos (reverse:true)
+  // Escala 1..5. Pontuação invertida: 6 - resposta.
+  const itens = [
+    // D
+    {id:"D1", dim:"D", t:"Eu tomo decisões rapidamente mesmo com informação incompleta."},
+    {id:"D2", dim:"D", t:"Eu me sinto confortável assumindo liderança quando necessário."},
+    {id:"D3", dim:"D", t:"Eu prefiro agir logo do que esperar o cenário perfeito."},
+    {id:"D4", dim:"D", t:"Em conflitos, eu vou direto ao ponto para resolver."},
+    {id:"D5", dim:"D", t:"Eu cobro metas e prazos com firmeza."},
+    {id:"D6", dim:"D", t:"Eu gosto de desafios e competição saudável."},
+    {id:"D7", dim:"D", t:"Eu me incomodo quando o ritmo do time é muito lento."},
+    {id:"D8", dim:"D", t:"Eu me arrisco para acelerar resultados (quando faz sentido)."},
+    {id:"D9", dim:"D", t:"Eu consigo dizer 'não' com facilidade quando preciso proteger prioridades."},
+    {id:"D10", dim:"D", t:"Eu evito assumir decisões e prefiro que alguém defina por mim.", reverse:true},
+
+    // I
+    {id:"I1", dim:"I", t:"Eu me energizo ao conversar e trocar ideias com pessoas."},
+    {id:"I2", dim:"I", t:"Eu consigo influenciar e engajar pessoas com facilidade."},
+    {id:"I3", dim:"I", t:"Eu costumo ser otimista e trazer leveza para o ambiente."},
+    {id:"I4", dim:"I", t:"Eu gosto de apresentar, gravar, falar em público ou liderar reuniões."},
+    {id:"I5", dim:"I", t:"Eu faço networking naturalmente."},
+    {id:"I6", dim:"I", t:"Quando estou animado(a), eu acelero o time."},
+    {id:"I7", dim:"I", t:"Eu prefiro tarefas com interação humana do que tarefas solitárias."},
+    {id:"I8", dim:"I", t:"Eu tenho facilidade em vender ideias e conseguir adesão."},
+    {id:"I9", dim:"I", t:"Eu evito exposição e prefiro ficar nos bastidores.", reverse:true},
+    {id:"I10", dim:"I", t:"Eu me comunico de forma calorosa e expressiva."},
+
+    // S
+    {id:"S1", dim:"S", t:"Eu mantenho a constância mesmo quando o time oscila."},
+    {id:"S2", dim:"S", t:"Eu sou paciente para treinar alguém até a pessoa pegar."},
+    {id:"S3", dim:"S", t:"Eu gosto de rotina bem definida e previsível."},
+    {id:"S4", dim:"S", t:"Eu percebo quando alguém do time não está bem e tento apoiar."},
+    {id:"S5", dim:"S", t:"Eu prefiro construir acordos do que 'vencer' discussões."},
+    {id:"S6", dim:"S", t:"Eu me adapto bem a processos desde que não mudem toda hora."},
+    {id:"S7", dim:"S", t:"Eu evito mudanças bruscas; gosto de transições planejadas."},
+    {id:"S8", dim:"S", t:"Eu sou consistente em cumprir tarefas repetitivas."},
+    {id:"S9", dim:"S", t:"Eu gosto de trabalhar em equipe e cooperar."},
+    {id:"S10", dim:"S", t:"Eu fico inquieto(a) com rotinas e preciso de mudança constante.", reverse:true},
+
+    // C
+    {id:"C1", dim:"C", t:"Eu presto atenção a detalhes e encontro erros com facilidade."},
+    {id:"C2", dim:"C", t:"Eu gosto de trabalhar com padrões, regras e critérios claros."},
+    {id:"C3", dim:"C", t:"Antes de agir, eu analiso riscos e cenários."},
+    {id:"C4", dim:"C", t:"Eu valorizo qualidade acima de velocidade."},
+    {id:"C5", dim:"C", t:"Eu documentaria um processo para reduzir falhas futuras."},
+    {id:"C6", dim:"C", t:"Eu questiono quando algo não tem lógica ou evidência."},
+    {id:"C7", dim:"C", t:"Eu gosto de métricas, planilhas, indicadores e rastreabilidade."},
+    {id:"C8", dim:"C", t:"Eu fico desconfortável com tarefas ambíguas sem critérios."},
+    {id:"C9", dim:"C", t:"Eu improviso facilmente e não ligo muito para padrão.", reverse:true},
+    {id:"C10", dim:"C", t:"Eu reviso meu trabalho para evitar retrabalho."},
+  ];
+
+  const $ = (id)=>document.getElementById(id);
+
+  function setToday(){
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,"0");
+    const dd = String(d.getDate()).padStart(2,"0");
+    $("data").value = `${yyyy}-${mm}-${dd}`;
+  }
+
+  function render(){
+    const box = $("questoes");
+    box.innerHTML = "";
+    itens.forEach((q, idx)=>{
+      const div = document.createElement("div");
+      div.className = "q";
+      div.innerHTML = `
+        <strong>${idx+1}. ${q.t}</strong>
+        <div class="scale" data-q="${q.id}">
+          ${[1,2,3,4,5].map(v=>`
+            <label class="chip">
+              <input type="radio" name="${q.id}" value="${v}" />
+              <span>${v}</span>
+            </label>
+          `).join("")}
+          <span class="muted">1 Discordo • 3 Neutro • 5 Concordo</span>
+        </div>
+      `;
+      box.appendChild(div);
+    });
+
+    box.addEventListener("change", ()=>{
+      const answered = itens.filter(q => document.querySelector(`input[name="${q.id}"]:checked`)).length;
+      const pct = Math.round((answered / itens.length) * 100);
+      $("prog").style.width = pct + "%";
+    });
+  }
+
+  function getAnswer(id){
+    const el = document.querySelector(`input[name="${id}"]:checked`);
+    return el ? Number(el.value) : null;
+  }
+
+  function calcScores(){
+    let sums = {D:0, I:0, S:0, C:0};
+    let counts = {D:0, I:0, S:0, C:0};
+
+    for (const q of itens){
+      const a = getAnswer(q.id);
+      if (a === null) continue;
+      const val = q.reverse ? (6 - a) : a;
+      sums[q.dim] += val;
+      counts[q.dim] += 1;
+    }
+
+    // valida se respondeu tudo
+    const answered = Object.values(counts).reduce((x,y)=>x+y,0);
+    if (answered < itens.length){
+      return { ok:false, msg:`Faltam ${itens.length - answered} resposta(s). Role a página e complete para ter um resultado mais fiel.` };
+    }
+
+    // normaliza para 0..100 (10 itens cada, cada item 1..5 => min 10 max 50)
+    const norm = {};
+    for (const k of ["D","I","S","C"]){
+      const min = 10, max = 50;
+      const pct = Math.round(((sums[k]-min)/(max-min))*100);
+      norm[k] = Math.max(0, Math.min(100, pct));
+    }
+
+    // predominante
+    const top = Object.entries(norm).sort((a,b)=>b[1]-a[1])[0][0];
+
+    return { ok:true, raw:sums, norm, top };
+  }
+
+  function showResult(res){
+    $("resultado").style.display = "block";
+    $("perfilTop").textContent = `${res.top} (${res.norm[res.top]}%)`;
+    $("perfilDesc").textContent = descricoes[res.top];
+
+    $("valD").textContent = res.norm.D + "%"; $("barD").style.width = res.norm.D + "%";
+    $("valI").textContent = res.norm.I + "%"; $("barI").style.width = res.norm.I + "%";
+    $("valS").textContent = res.norm.S + "%"; $("barS").style.width = res.norm.S + "%";
+    $("valC").textContent = res.norm.C + "%"; $("barC").style.width = res.norm.C + "%";
+
+    // guarda para enviar/copiar
+    window.__last = res;
+  }
+
+  function buildPayload(){
+    const answers = {};
+    itens.forEach(q => { answers[q.id] = getAnswer(q.id); });
+
+    return {
+      nome: $("nome").value.trim(),
+      setor: $("setor").value.trim(),
+      email: $("email").value.trim(),
+      data: $("data").value,
+      resultado: window.__last,
+      respostas: answers,
+      userAgent: navigator.userAgent
+    };
+  }
+
+  async function send(){
+    const status = $("status");
+    status.textContent = "";
+    if (!ENDPOINT){
+      status.textContent = "ENDPOINT não configurado. Cole a URL do Apps Script no topo do arquivo (const ENDPOINT).";
+      return;
+    }
+    const payload = buildPayload();
+    if (!payload.nome || !payload.setor){
+      status.textContent = "Preencha Nome e Setor/Função antes de enviar.";
+      return;
+    }
+
+    try{
+      status.textContent = "Enviando…";
+      const r = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(payload)
+      });
+      const txt = await r.text();
+      status.textContent = r.ok ? "Enviado com sucesso ✅" : ("Erro ao enviar: " + txt);
+    }catch(e){
+      status.textContent = "Falha de rede ao enviar. Tente novamente ou verifique o endpoint.";
+    }
+  }
+
+  function copySummary(){
+    const p = buildPayload();
+    const n = window.__last?.norm;
+    const top = window.__last?.top;
+    const text =
+`DISC - Resultado
+Nome: ${p.nome}
+Setor: ${p.setor}
+Data: ${p.data}
+D: ${n.D}% | I: ${n.I}% | S: ${n.S}% | C: ${n.C}%
+Predominante: ${top}
+`;
+    navigator.clipboard.writeText(text).then(()=>{
+      $("status").textContent = "Resumo copiado ✅";
+    });
+  }
+
+  function clearAll(){
+    document.querySelectorAll(`input[type="radio"]`).forEach(r=>r.checked=false);
+    $("resultado").style.display = "none";
+    $("status").textContent = "";
+    $("prog").style.width = "0%";
+  }
+
+  $("btnCalcular").addEventListener("click", ()=>{
+    const res = calcScores();
+    if (!res.ok){
+      alert(res.msg);
+      return;
+    }
+    showResult(res);
+    window.scrollTo({top: document.body.scrollHeight, behavior:"smooth"});
+  });
+
+  $("btnEnviar").addEventListener("click", send);
+  $("btnCopiar").addEventListener("click", copySummary);
+  $("btnLimpar").addEventListener("click", clearAll);
+
+  setToday();
+  render();
+</script>
+</body>
+</html>
