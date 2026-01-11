@@ -3,41 +3,55 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Teste de Perfil Comportamental (DISC) - Flex Company</title>
+  <title>Teste Comportamental (DISC Premium) - Flex Company</title>
   <style>
     :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
     body { margin: 0; background: #0b1220; color: #e8eefc; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 22px; }
     .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 18px; }
-    h1 { font-size: 20px; margin: 0 0 8px; }
+    h1 { font-size: 18px; margin: 0 0 8px; }
     p { margin: 6px 0 12px; color: rgba(232,238,252,0.84); line-height: 1.35; }
-    label { display:block; font-weight: 600; margin: 10px 0 6px; }
-    input, select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18); background: rgba(0,0,0,0.18); color: #e8eefc; }
+    label { display:block; font-weight: 700; margin: 10px 0 6px; }
+    input[type="text"], input[type="email"]{
+      width: 100%; padding: 12px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.18); color: #e8eefc;
+    }
     .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media (max-width: 720px){ .grid{ grid-template-columns: 1fr; } }
 
-    .q { padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.14); margin: 12px 0; }
-    .q strong { display:block; margin-bottom: 10px; }
-    .scale { display:flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-    .chip { display:flex; gap:8px; align-items:center; padding:8px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); }
-    .chip input { width:auto; }
+    .top { display:flex; gap:12px; align-items:center; justify-content: space-between; flex-wrap:wrap; }
+    .progress { flex: 1; min-width: 220px; height: 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.07); overflow:hidden; }
+    .progress > i { display:block; height:100%; width:0%; background: rgba(90, 200, 255, 0.85); }
+
+    .hr { height:1px; background: rgba(255,255,255,0.14); margin: 14px 0; }
     .muted { font-size: 12px; color: rgba(232,238,252,0.72); }
+    .tiny { font-size: 11px; color: rgba(232,238,252,0.65); }
+
+    .block { padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.14); margin: 12px 0; }
+    .block strong { display:block; margin-bottom: 10px; }
+
+    .choices { display:grid; gap:10px; }
+    .row { border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 10px; background: rgba(255,255,255,0.05); }
+    .row .txt { margin: 0 0 8px; font-weight: 600; }
+    .pick { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+    .chip { display:flex; gap:8px; align-items:center; padding:7px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.12); }
+    .chip input { width:auto; }
+
+    .btns { display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
+    button { padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.10); color:#e8eefc; font-weight:800; cursor:pointer; }
+    button:hover { background: rgba(255,255,255,0.14); }
+    .ok { background: rgba(90, 255, 170, 0.14); }
+    .danger { background: rgba(255, 90, 90, 0.18); }
 
     .barbox { margin-top: 16px; display:grid; gap: 10px; }
     .barrow { display:grid; grid-template-columns: 44px 1fr 56px; gap: 10px; align-items:center; }
     .bar { height: 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.07); overflow: hidden; }
     .bar > i { display:block; height:100%; width: 0%; background: rgba(140, 200, 255, 0.85); }
-    .pill { display:inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); }
-    .btns { display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
-    button { padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.10); color:#e8eefc; font-weight:700; cursor:pointer; }
-    button:hover { background: rgba(255,255,255,0.14); }
-    .danger { background: rgba(255, 90, 90, 0.18); }
-    .ok { background: rgba(90, 255, 170, 0.14); }
-    .hr { height:1px; background: rgba(255,255,255,0.14); margin: 14px 0; }
-    .tiny { font-size: 11px; color: rgba(232,238,252,0.65); }
-    .top { display:flex; gap:10px; align-items:center; justify-content: space-between; flex-wrap:wrap; }
-    .progress { flex: 1; min-width: 220px; height: 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.07); overflow:hidden; }
-    .progress > i { display:block; height:100%; width:0%; background: rgba(90, 200, 255, 0.85); }
+    .pill { display:inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); font-weight:800; }
+
+    .callout { border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 12px; background: rgba(255,255,255,0.05); }
+    .warn { color: rgba(255,220,120,0.95); font-weight:800; }
   </style>
 </head>
 <body>
@@ -45,10 +59,11 @@
     <div class="card">
       <div class="top">
         <div>
-          <h1>Teste de Perfil Comportamental (DISC)</h1>
+          <h1>Teste Comportamental DISC (Premium • Escolha Forçada)</h1>
           <p class="muted">
-            Escala de 1 a 5: 1 = Discordo totalmente | 5 = Concordo totalmente.
-            <br/>Uso recomendado: autoconhecimento e alinhamento de equipe (não é diagnóstico clínico).
+            Em cada bloco, marque:
+            <b>MAIS</b> (o que mais parece com você) e <b>MENOS</b> (o que menos parece com você).
+            <br/>Não existe resposta certa. Responda pensando no seu comportamento típico no trabalho.
           </p>
         </div>
         <div class="progress" title="Progresso"><i id="prog"></i></div>
@@ -57,25 +72,26 @@
       <div class="grid" style="margin-top:10px;">
         <div>
           <label>Nome completo</label>
-          <input id="nome" placeholder="Ex.: Patricia Abilio" />
+          <input id="nome" type="text" placeholder="Ex.: Patricia Abilio" />
         </div>
         <div>
           <label>Setor / Função</label>
-          <input id="setor" placeholder="Ex.: Comercial / Social Seller" />
+          <input id="setor" type="text" placeholder="Ex.: Comercial / Social Seller" />
         </div>
         <div>
           <label>E-mail (opcional)</label>
-          <input id="email" placeholder="Ex.: nome@empresa.com" />
+          <input id="email" type="email" placeholder="Ex.: nome@empresa.com" />
         </div>
         <div>
           <label>Data</label>
-          <input id="data" type="date" />
+          <input id="data" type="text" />
+          <div class="muted">Preenchida automaticamente.</div>
         </div>
       </div>
 
       <div class="hr"></div>
 
-      <div id="questoes"></div>
+      <div id="blocks"></div>
 
       <div class="btns">
         <button id="btnCalcular" class="ok">Ver meu resultado</button>
@@ -86,8 +102,8 @@
         <div class="hr"></div>
         <h1>Seu resultado</h1>
         <p>
-          Perfil predominante: <span class="pill" id="perfilTop"></span>
-          <br/><span class="muted" id="perfilDesc"></span>
+          Predominante: <span class="pill" id="perfilTop"></span>
+          <br/>Secundário: <span class="pill" id="perfil2"></span>
         </p>
 
         <div class="barbox">
@@ -97,8 +113,15 @@
           <div class="barrow"><strong>C</strong><div class="bar"><i id="barC"></i></div><span id="valC">0</span></div>
         </div>
 
+        <div class="hr"></div>
+
+        <div class="callout">
+          <div id="descTop" style="margin-bottom:10px;"></div>
+          <div id="dicasTop" class="muted"></div>
+          <div id="alerta" class="muted" style="margin-top:10px;"></div>
+        </div>
+
         <div class="btns">
-          <button id="btnEnviar">Enviar para a empresa</button>
           <button id="btnCopiar">Copiar resumo</button>
         </div>
 
@@ -106,74 +129,15 @@
       </div>
 
       <p class="tiny">
-        Privacidade: as respostas devem ser usadas para desenvolvimento, não para “rotular” pessoas.
-        Se você for hospedar e coletar dados, avise a equipe de forma transparente.
+        Transparência: este instrumento serve para autoconhecimento e alinhamento de comunicação. Evite usar como “rótulo” fixo.
       </p>
     </div>
   </div>
 
 <script>
-  // ✅ CONFIG: cole aqui a URL do seu Apps Script (Web App) quando criar
-  const ENDPOINT = ""; // ex.: "https://script.google.com/macros/s/XXXX/exec"
-
-  const descricoes = {
-    D: "Dominância: foco em resultado, velocidade, decisão, assertividade. Pode soar direto; brilha em metas e crise.",
-    I: "Influência: energia social, persuasão, comunicação e entusiasmo. Brilha em engajamento; pode dispersar sem estrutura.",
-    S: "Estabilidade: consistência, cooperação, paciência e suporte. Brilha em rotina e cuidado; pode evitar conflito.",
-    C: "Conformidade: precisão, padrões, análise e qualidade. Brilha em processos; pode travar com ambiguidade."
-  };
-
-  // 40 itens (10 por dimensão). Alguns são invertidos (reverse:true)
-  // Escala 1..5. Pontuação invertida: 6 - resposta.
-  const itens = [
-    // D
-    {id:"D1", dim:"D", t:"Eu tomo decisões rapidamente mesmo com informação incompleta."},
-    {id:"D2", dim:"D", t:"Eu me sinto confortável assumindo liderança quando necessário."},
-    {id:"D3", dim:"D", t:"Eu prefiro agir logo do que esperar o cenário perfeito."},
-    {id:"D4", dim:"D", t:"Em conflitos, eu vou direto ao ponto para resolver."},
-    {id:"D5", dim:"D", t:"Eu cobro metas e prazos com firmeza."},
-    {id:"D6", dim:"D", t:"Eu gosto de desafios e competição saudável."},
-    {id:"D7", dim:"D", t:"Eu me incomodo quando o ritmo do time é muito lento."},
-    {id:"D8", dim:"D", t:"Eu me arrisco para acelerar resultados (quando faz sentido)."},
-    {id:"D9", dim:"D", t:"Eu consigo dizer 'não' com facilidade quando preciso proteger prioridades."},
-    {id:"D10", dim:"D", t:"Eu evito assumir decisões e prefiro que alguém defina por mim.", reverse:true},
-
-    // I
-    {id:"I1", dim:"I", t:"Eu me energizo ao conversar e trocar ideias com pessoas."},
-    {id:"I2", dim:"I", t:"Eu consigo influenciar e engajar pessoas com facilidade."},
-    {id:"I3", dim:"I", t:"Eu costumo ser otimista e trazer leveza para o ambiente."},
-    {id:"I4", dim:"I", t:"Eu gosto de apresentar, gravar, falar em público ou liderar reuniões."},
-    {id:"I5", dim:"I", t:"Eu faço networking naturalmente."},
-    {id:"I6", dim:"I", t:"Quando estou animado(a), eu acelero o time."},
-    {id:"I7", dim:"I", t:"Eu prefiro tarefas com interação humana do que tarefas solitárias."},
-    {id:"I8", dim:"I", t:"Eu tenho facilidade em vender ideias e conseguir adesão."},
-    {id:"I9", dim:"I", t:"Eu evito exposição e prefiro ficar nos bastidores.", reverse:true},
-    {id:"I10", dim:"I", t:"Eu me comunico de forma calorosa e expressiva."},
-
-    // S
-    {id:"S1", dim:"S", t:"Eu mantenho a constância mesmo quando o time oscila."},
-    {id:"S2", dim:"S", t:"Eu sou paciente para treinar alguém até a pessoa pegar."},
-    {id:"S3", dim:"S", t:"Eu gosto de rotina bem definida e previsível."},
-    {id:"S4", dim:"S", t:"Eu percebo quando alguém do time não está bem e tento apoiar."},
-    {id:"S5", dim:"S", t:"Eu prefiro construir acordos do que 'vencer' discussões."},
-    {id:"S6", dim:"S", t:"Eu me adapto bem a processos desde que não mudem toda hora."},
-    {id:"S7", dim:"S", t:"Eu evito mudanças bruscas; gosto de transições planejadas."},
-    {id:"S8", dim:"S", t:"Eu sou consistente em cumprir tarefas repetitivas."},
-    {id:"S9", dim:"S", t:"Eu gosto de trabalhar em equipe e cooperar."},
-    {id:"S10", dim:"S", t:"Eu fico inquieto(a) com rotinas e preciso de mudança constante.", reverse:true},
-
-    // C
-    {id:"C1", dim:"C", t:"Eu presto atenção a detalhes e encontro erros com facilidade."},
-    {id:"C2", dim:"C", t:"Eu gosto de trabalhar com padrões, regras e critérios claros."},
-    {id:"C3", dim:"C", t:"Antes de agir, eu analiso riscos e cenários."},
-    {id:"C4", dim:"C", t:"Eu valorizo qualidade acima de velocidade."},
-    {id:"C5", dim:"C", t:"Eu documentaria um processo para reduzir falhas futuras."},
-    {id:"C6", dim:"C", t:"Eu questiono quando algo não tem lógica ou evidência."},
-    {id:"C7", dim:"C", t:"Eu gosto de métricas, planilhas, indicadores e rastreabilidade."},
-    {id:"C8", dim:"C", t:"Eu fico desconfortável com tarefas ambíguas sem critérios."},
-    {id:"C9", dim:"C", t:"Eu improviso facilmente e não ligo muito para padrão.", reverse:true},
-    {id:"C10", dim:"C", t:"Eu reviso meu trabalho para evitar retrabalho."},
-  ];
+  // Opcional (se você quiser guardar respostas em planilha depois):
+  // const ENDPOINT = "https://script.google.com/macros/s/XXXX/exec";
+  const ENDPOINT = "";
 
   const $ = (id)=>document.getElementById(id);
 
@@ -182,141 +146,608 @@
     const yyyy = d.getFullYear();
     const mm = String(d.getMonth()+1).padStart(2,"0");
     const dd = String(d.getDate()).padStart(2,"0");
-    $("data").value = `${yyyy}-${mm}-${dd}`;
+    $("data").value = `${dd}/${mm}/${yyyy}`;
   }
 
+  // Textos curtos para devolutiva
+  const profile = {
+    D: {
+      name: "D (Dominância)",
+      desc: "Foco em resultado, decisão e ritmo. Gosta de autonomia, resolve e cobra.",
+      tips: "Dicas: seja objetivo(a) e direto(a). Combine meta, prazo e liberdade de execução. Evite excesso de detalhe sem necessidade."
+    },
+    I: {
+      name: "I (Influência)",
+      desc: "Foco em pessoas, comunicação e engajamento. Conecta, influencia e movimenta o ambiente.",
+      tips: "Dicas: converse, traga contexto e propósito. Use exemplos e reconhecimento. Ajuda ter checkpoints curtos para manter foco."
+    },
+    S: {
+      name: "S (Estabilidade)",
+      desc: "Foco em consistência, cooperação e estabilidade. Sustenta rotina, apoia o time, dá previsibilidade.",
+      tips: "Dicas: dê clareza de passo a passo, tempo e transição. Evite mudanças bruscas sem alinhamento. Combine ritmo e segurança."
+    },
+    C: {
+      name: "C (Conformidade)",
+      desc: "Foco em critério, qualidade e precisão. Analisa riscos, organiza padrões e reduz erro.",
+      tips: "Dicas: forneça critérios, evidências e padrão do que é “bem feito”. Antecipe perguntas. Combine qualidade com prazo realista."
+    }
+  };
+
+  // DISC Premium: 64 blocos, 4 opções (1 D, 1 I, 1 S, 1 C) em ordem mascarada
+  const blocks = [
+    { id:"B1",  prompt:"Quando estou envolvido(a) em um projeto, eu costumo:", options:[
+      {t:"Conferir se tudo está sendo feito corretamente", dim:"C"},
+      {t:"Manter um ritmo constante, mesmo sob pressão", dim:"S"},
+      {t:"Conversar com as pessoas para alinhar expectativas", dim:"I"},
+      {t:"Tomar decisões rapidamente para evitar atrasos", dim:"D"},
+    ]},
+    { id:"B2",  prompt:"Em situações novas no trabalho, eu geralmente:", options:[
+      {t:"Me aproximo das pessoas para entender o clima", dim:"I"},
+      {t:"Analiso o cenário antes de qualquer movimento", dim:"C"},
+      {t:"Aguardo orientação antes de agir", dim:"S"},
+      {t:"Assumo a frente se perceber falta de direção", dim:"D"},
+    ]},
+    { id:"B3",  prompt:"Durante reuniões, eu tendo a:", options:[
+      {t:"Ouvir com atenção e apoiar decisões do grupo", dim:"S"},
+      {t:"Avaliar informações e fazer anotações mentais", dim:"C"},
+      {t:"Ir direto ao ponto para ganhar tempo", dim:"D"},
+      {t:"Falar e interagir para manter o grupo engajado", dim:"I"},
+    ]},
+    { id:"B4",  prompt:"Quando surge um problema inesperado, minha reação inicial é:", options:[
+      {t:"Entender a causa antes de agir", dim:"C"},
+      {t:"Conversar com alguém para pensar em soluções", dim:"I"},
+      {t:"Resolver rapidamente, mesmo assumindo riscos", dim:"D"},
+      {t:"Tentar manter o ambiente calmo", dim:"S"},
+    ]},
+    { id:"B5",  prompt:"No dia a dia profissional, eu me sinto mais confortável quando:", options:[
+      {t:"Existem regras e critérios claros", dim:"C"},
+      {t:"Existe previsibilidade e estabilidade", dim:"S"},
+      {t:"Posso agir com autonomia", dim:"D"},
+      {t:"Posso me comunicar livremente", dim:"I"},
+    ]},
+    { id:"B6",  prompt:"Quando há prazos apertados, eu costumo:", options:[
+      {t:"Motivar as pessoas para acelerar", dim:"I"},
+      {t:"Redobrar o cuidado para evitar erros", dim:"C"},
+      {t:"Pressionar para que as coisas avancem", dim:"D"},
+      {t:"Me manter constante e focado(a)", dim:"S"},
+    ]},
+    { id:"B7",  prompt:"Ao receber uma tarefa importante, eu geralmente:", options:[
+      {t:"Analisar todos os detalhes antes de começar", dim:"C"},
+      {t:"Organizar meu tempo com calma", dim:"S"},
+      {t:"Querer clareza sobre o resultado esperado", dim:"D"},
+      {t:"Pensar em quem pode me ajudar", dim:"I"},
+    ]},
+    { id:"B8",  prompt:"Em ambientes muito movimentados, eu tendo a:", options:[
+      {t:"Me sentir estimulado(a) pela troca", dim:"I"},
+      {t:"Buscar equilíbrio e evitar conflitos", dim:"S"},
+      {t:"Observar mais do que falar", dim:"C"},
+      {t:"Me irritar com lentidão ou indecisão", dim:"D"},
+    ]},
+    { id:"B9",  prompt:"Quando alguém discorda de mim, eu costumo:", options:[
+      {t:"Pedir dados ou fatos para embasar", dim:"C"},
+      {t:"Evitar confronto direto", dim:"S"},
+      {t:"Defender meu ponto de vista com firmeza", dim:"D"},
+      {t:"Tentar convencer com diálogo", dim:"I"},
+    ]},
+    { id:"B10", prompt:"No trabalho em equipe, eu geralmente:", options:[
+      {t:"Estimular o engajamento do grupo", dim:"I"},
+      {t:"Garantir que o padrão seja seguido", dim:"C"},
+      {t:"Apoiar para que todos se sintam confortáveis", dim:"S"},
+      {t:"Assumir responsabilidades rapidamente", dim:"D"},
+    ]},
+    { id:"B11", prompt:"Diante de mudanças frequentes, eu:", options:[
+      {t:"Questiono o impacto da mudança", dim:"C"},
+      {t:"Demoro um pouco para me ajustar", dim:"S"},
+      {t:"Me adapto rapidamente", dim:"D"},
+      {t:"Vejo como oportunidade de interação", dim:"I"},
+    ]},
+    { id:"B12", prompt:"Quando algo dá errado, eu tendo a:", options:[
+      {t:"Investigar o que causou o erro", dim:"C"},
+      {t:"Buscar uma solução imediata", dim:"D"},
+      {t:"Conversar para aliviar a tensão", dim:"I"},
+      {t:"Me preocupar com as pessoas envolvidas", dim:"S"},
+    ]},
+    { id:"B13", prompt:"Em decisões importantes, eu valorizo mais:", options:[
+      {t:"Precisão", dim:"C"},
+      {t:"Segurança", dim:"S"},
+      {t:"Conexão", dim:"I"},
+      {t:"Velocidade", dim:"D"},
+    ]},
+    { id:"B14", prompt:"No meu ritmo de trabalho, eu sou mais:", options:[
+      {t:"Constante", dim:"S"},
+      {t:"Cuidadoso(a)", dim:"C"},
+      {t:"Expressivo(a)", dim:"I"},
+      {t:"Intenso(a)", dim:"D"},
+    ]},
+    { id:"B15", prompt:"Quando recebo feedback, eu costumo:", options:[
+      {t:"Analisar racionalmente", dim:"C"},
+      {t:"Querer objetividade", dim:"D"},
+      {t:"Ouvir com calma", dim:"S"},
+      {t:"Reagir emocionalmente", dim:"I"},
+    ]},
+    { id:"B16", prompt:"Em situações de pressão, eu:", options:[
+      {t:"Falo mais", dim:"I"},
+      {t:"Fico mais crítico(a)", dim:"C"},
+      {t:"Fico mais direto(a)", dim:"D"},
+      {t:"Me fecho um pouco", dim:"S"},
+    ]},
+
+    // A partir daqui: premium com variações de contexto + repetição disfarçada
+    { id:"B17", prompt:"Ao iniciar um projeto com pouca clareza, eu prefiro:", options:[
+      {t:"Definir um caminho e começar", dim:"D"},
+      {t:"Reunir pessoas para construir entendimento", dim:"I"},
+      {t:"Aguardar que fique mais estável antes de avançar", dim:"S"},
+      {t:"Estabelecer critérios e levantar riscos", dim:"C"},
+    ]},
+    { id:"B18", prompt:"Quando preciso orientar alguém, eu costumo:", options:[
+      {t:"Ir direto no que precisa ser feito", dim:"D"},
+      {t:"Explicar com exemplos e energia", dim:"I"},
+      {t:"Acompanhar passo a passo até ganhar confiança", dim:"S"},
+      {t:"Padronizar a orientação com regras e checagens", dim:"C"},
+    ]},
+    { id:"B19", prompt:"Se o time está lento, meu impulso é:", options:[
+      {t:"Acelerar com cobrança e prioridade", dim:"D"},
+      {t:"Engajar e animar para destravar", dim:"I"},
+      {t:"Manter o ritmo e não desorganizar o grupo", dim:"S"},
+      {t:"Rever processo para achar gargalo", dim:"C"},
+    ]},
+    { id:"B20", prompt:"Em tarefas repetitivas, eu geralmente:", options:[
+      {t:"Faço rápido para liberar espaço", dim:"D"},
+      {t:"Procuro interação para ficar mais leve", dim:"I"},
+      {t:"Me sinto bem com constância e rotina", dim:"S"},
+      {t:"Sigo padrão para não errar", dim:"C"},
+    ]},
+    { id:"B21", prompt:"Quando recebo uma demanda urgente por mensagem, eu:", options:[
+      {t:"Respondo e decido de imediato", dim:"D"},
+      {t:"Respondo com abertura e alinhamento", dim:"I"},
+      {t:"Respondo com calma e estabilidade", dim:"S"},
+      {t:"Peço informação objetiva antes de agir", dim:"C"},
+    ]},
+    { id:"B22", prompt:"Se alguém do time está tenso, eu tendo a:", options:[
+      {t:"Focar em solução e tirar o drama", dim:"D"},
+      {t:"Conversar para aliviar e aproximar", dim:"I"},
+      {t:"Acolher e manter um ambiente seguro", dim:"S"},
+      {t:"Entender o que gerou o problema e corrigir", dim:"C"},
+    ]},
+    { id:"B23", prompt:"Ao apresentar uma ideia, eu normalmente:", options:[
+      {t:"Vou no impacto e no resultado", dim:"D"},
+      {t:"Capricho no carisma e no engajamento", dim:"I"},
+      {t:"Busco consenso e adesão tranquila", dim:"S"},
+      {t:"Trago dados, critérios e comparações", dim:"C"},
+    ]},
+    { id:"B24", prompt:"Em situações de conflito, eu prefiro:", options:[
+      {t:"Resolver de forma direta", dim:"D"},
+      {t:"Conversar até reduzir tensão", dim:"I"},
+      {t:"Evitar escalada e manter harmonia", dim:"S"},
+      {t:"Basear a conversa em fatos e regra", dim:"C"},
+    ]},
+    { id:"B25", prompt:"Quando me pedem algo sem prazo, eu:", options:[
+      {t:"Defino um prazo e avanço", dim:"D"},
+      {t:"Alinho com pessoas envolvidas", dim:"I"},
+      {t:"Vou fazendo conforme o fluxo", dim:"S"},
+      {t:"Organizo critérios e entregáveis", dim:"C"},
+    ]},
+    { id:"B26", prompt:"Se uma tarefa exige precisão, eu:", options:[
+      {t:"Entrego rápido e ajusto depois", dim:"D"},
+      {t:"Peço ajuda/feedback para validar", dim:"I"},
+      {t:"Faço com calma para não errar", dim:"S"},
+      {t:"Reviso e testo até ficar correto", dim:"C"},
+    ]},
+    { id:"B27", prompt:"Quando algo muda de última hora, eu:", options:[
+      {t:"Mudo rota e sigo", dim:"D"},
+      {t:"Aviso e mobilizo as pessoas", dim:"I"},
+      {t:"Fico desconfortável e preciso de transição", dim:"S"},
+      {t:"Reavalio impacto e risco antes", dim:"C"},
+    ]},
+    { id:"B28", prompt:"Em metas agressivas, eu me sinto:", options:[
+      {t:"Motivado(a) pelo desafio", dim:"D"},
+      {t:"Estimulado(a) por ver o time engajado", dim:"I"},
+      {t:"Mais seguro(a) com metas bem planejadas", dim:"S"},
+      {t:"Mais seguro(a) com critérios e métricas", dim:"C"},
+    ]},
+    { id:"B29", prompt:"Quando preciso cobrar alguém, eu:", options:[
+      {t:"Cobro direto e objetivamente", dim:"D"},
+      {t:"Cobro com conversa e incentivo", dim:"I"},
+      {t:"Cobro com cuidado para não gerar atrito", dim:"S"},
+      {t:"Cobro com base em regra e combinado", dim:"C"},
+    ]},
+    { id:"B30", prompt:"Ao finalizar algo, eu costumo:", options:[
+      {t:"Encerrar e partir para a próxima", dim:"D"},
+      {t:"Compartilhar com pessoas e celebrar", dim:"I"},
+      {t:"Garantir que todos estejam bem com a entrega", dim:"S"},
+      {t:"Checar qualidade e consistência", dim:"C"},
+    ]},
+    { id:"B31", prompt:"Se o processo está confuso, eu:", options:[
+      {t:"Simplifico e faço acontecer", dim:"D"},
+      {t:"Chamo pessoas para alinhar", dim:"I"},
+      {t:"Sigo o fluxo para não bagunçar mais", dim:"S"},
+      {t:"Reestruturo com padrão e etapas", dim:"C"},
+    ]},
+    { id:"B32", prompt:"Quando estou muito atarefado(a), eu:", options:[
+      {t:"Prioritizo e corto o que não importa", dim:"D"},
+      {t:"Peço ajuda e alinho com pessoas", dim:"I"},
+      {t:"Mantenho constância para dar conta", dim:"S"},
+      {t:"Organizo e detalho para reduzir erro", dim:"C"},
+    ]},
+    { id:"B33", prompt:"Diante de uma oportunidade nova, eu:", options:[
+      {t:"Aproveito e avanço rápido", dim:"D"},
+      {t:"Penso em quem pode se envolver", dim:"I"},
+      {t:"Avalio se vai desestabilizar rotina", dim:"S"},
+      {t:"Avalio viabilidade e risco", dim:"C"},
+    ]},
+    { id:"B34", prompt:"Quando preciso aprender algo novo, eu prefiro:", options:[
+      {t:"Aprender fazendo, rápido", dim:"D"},
+      {t:"Aprender com pessoas/troca", dim:"I"},
+      {t:"Aprender no meu ritmo, com repetição", dim:"S"},
+      {t:"Aprender com método, material e critério", dim:"C"},
+    ]},
+    { id:"B35", prompt:"Quando me pedem para improvisar, eu:", options:[
+      {t:"Improviso e resolvo", dim:"D"},
+      {t:"Improviso conversando e ajustando", dim:"I"},
+      {t:"Fico mais travado(a) sem previsibilidade", dim:"S"},
+      {t:"Prefiro evitar improviso sem critério", dim:"C"},
+    ]},
+    { id:"B36", prompt:"Quando há muita opinião no time, eu:", options:[
+      {t:"Decido e fecho caminho", dim:"D"},
+      {t:"Facilito conversa e conexão", dim:"I"},
+      {t:"Tento manter harmonia e estabilidade", dim:"S"},
+      {t:"Busco critérios para decidir", dim:"C"},
+    ]},
+    { id:"B37", prompt:"Se um cliente/aluno está exigente, eu:", options:[
+      {t:"Trato com objetividade e foco no resultado", dim:"D"},
+      {t:"Uso empatia e comunicação para acalmar", dim:"I"},
+      {t:"Mantenho paciência e consistência no atendimento", dim:"S"},
+      {t:"Sigo procedimento e evidências", dim:"C"},
+    ]},
+    { id:"B38", prompt:"Se preciso delegar, eu costumo:", options:[
+      {t:"Delegar e cobrar entrega", dim:"D"},
+      {t:"Delegar conversando e alinhando expectativas", dim:"I"},
+      {t:"Delegar garantindo suporte e continuidade", dim:"S"},
+      {t:"Delegar definindo padrão e critérios", dim:"C"},
+    ]},
+    { id:"B39", prompt:"Quando recebo uma crítica, meu impulso é:", options:[
+      {t:"Responder objetivamente e ajustar rota", dim:"D"},
+      {t:"Explicar meu lado e manter relação", dim:"I"},
+      {t:"Ficar mais reservado(a) e refletir", dim:"S"},
+      {t:"Analisar lógica e evidências da crítica", dim:"C"},
+    ]},
+    { id:"B40", prompt:"Quando um plano falha, eu:", options:[
+      {t:"Replanejo rápido e sigo", dim:"D"},
+      {t:"Mobilizo pessoas para retomar energia", dim:"I"},
+      {t:"Procuro estabilizar e não perder o controle", dim:"S"},
+      {t:"Identifico causa raiz para não repetir", dim:"C"},
+    ]},
+    { id:"B41", prompt:"Em um dia ideal de trabalho, eu teria mais:", options:[
+      {t:"Autonomia e decisões", dim:"D"},
+      {t:"Interação e troca", dim:"I"},
+      {t:"Rotina previsível e colaboração", dim:"S"},
+      {t:"Critérios claros e qualidade", dim:"C"},
+    ]},
+    { id:"B42", prompt:"Quando alguém está indeciso, eu:", options:[
+      {t:"Empurro para decidir", dim:"D"},
+      {t:"Converso para destravar", dim:"I"},
+      {t:"Dou tempo e suporte", dim:"S"},
+      {t:"Peço dados e critérios", dim:"C"},
+    ]},
+    { id:"B43", prompt:"Se recebo muita informação, eu:", options:[
+      {t:"Filtra o essencial e decide", dim:"D"},
+      {t:"Transformo em conversa e alinhamento", dim:"I"},
+      {t:"Vou absorvendo aos poucos", dim:"S"},
+      {t:"Organizo, comparo e valido", dim:"C"},
+    ]},
+    { id:"B44", prompt:"Quando preciso defender uma pauta, eu:", options:[
+      {t:"Vou firme, focado(a) em resultado", dim:"D"},
+      {t:"Uso persuasão e conexão", dim:"I"},
+      {t:"Busco apoio sem criar atrito", dim:"S"},
+      {t:"Uso fatos, padrões e evidências", dim:"C"},
+    ]},
+    { id:"B45", prompt:"Se alguém quebra um combinado, eu:", options:[
+      {t:"Cobro e corrijo de imediato", dim:"D"},
+      {t:"Convido para conversar e alinhar", dim:"I"},
+      {t:"Tento manter o clima e ajustar com calma", dim:"S"},
+      {t:"Reforço regra e impacto do desvio", dim:"C"},
+    ]},
+    { id:"B46", prompt:"Quando preciso tomar uma decisão com risco, eu:", options:[
+      {t:"Assumo e sigo", dim:"D"},
+      {t:"Busco opinião rápida de alguém", dim:"I"},
+      {t:"Prefiro reduzir risco antes", dim:"S"},
+      {t:"Avalio cenários e probabilidade", dim:"C"},
+    ]},
+    { id:"B47", prompt:"Em projetos longos, eu:", options:[
+      {t:"Quero marcos e avanço visível", dim:"D"},
+      {t:"Gosto de manter o time animado", dim:"I"},
+      {t:"Gosto de constância e previsibilidade", dim:"S"},
+      {t:"Gosto de controle de qualidade e padrão", dim:"C"},
+    ]},
+    { id:"B48", prompt:"Quando estou cansado(a), eu tendo a:", options:[
+      {t:"Ficar mais impaciente e direto(a)", dim:"D"},
+      {t:"Falar mais para aliviar tensão", dim:"I"},
+      {t:"Me fechar e ficar mais silencioso(a)", dim:"S"},
+      {t:"Ficar mais crítico(a) com detalhes", dim:"C"},
+    ]},
+    { id:"B49", prompt:"Se eu percebo um erro pequeno, eu:", options:[
+      {t:"Corrijo rápido e sigo", dim:"D"},
+      {t:"Aviso de um jeito leve", dim:"I"},
+      {t:"Corrijo sem expor ninguém", dim:"S"},
+      {t:"Correto e reviso para não repetir", dim:"C"},
+    ]},
+    { id:"B50", prompt:"Quando preciso negociar prazos, eu:", options:[
+      {t:"Defino o prazo e foco na entrega", dim:"D"},
+      {t:"Negocio alinhando expectativas e relação", dim:"I"},
+      {t:"Prefiro um prazo realista e estável", dim:"S"},
+      {t:"Prefiro prazo baseado em critério e risco", dim:"C"},
+    ]},
+    { id:"B51", prompt:"Se um procedimento é burocrático, eu:", options:[
+      {t:"Corto etapas para ganhar velocidade", dim:"D"},
+      {t:"Converso para achar um meio termo", dim:"I"},
+      {t:"Sigo para manter estabilidade", dim:"S"},
+      {t:"Sigo porque reduz erro e dá padrão", dim:"C"},
+    ]},
+    { id:"B52", prompt:"Quando preciso comunicar uma mudança, eu:", options:[
+      {t:"Comunico o que mudou e pronto", dim:"D"},
+      {t:"Comunico com energia e engajamento", dim:"I"},
+      {t:"Comunico cuidando do impacto nas pessoas", dim:"S"},
+      {t:"Comunico com regras, critérios e passos", dim:"C"},
+    ]},
+    { id:"B53", prompt:"Em uma conversa difícil, eu:", options:[
+      {t:"Prefiro ser direto(a) para resolver", dim:"D"},
+      {t:"Prefiro manter conexão e reduzir atrito", dim:"I"},
+      {t:"Prefiro evitar tensão e ir com calma", dim:"S"},
+      {t:"Prefiro fatos e critérios para ser justo(a)", dim:"C"},
+    ]},
+    { id:"B54", prompt:"Quando trabalho com alguém muito detalhista, eu:", options:[
+      {t:"Fico impaciente e quero ir logo", dim:"D"},
+      {t:"Tento tornar a conversa leve", dim:"I"},
+      {t:"Me adapto para manter harmonia", dim:"S"},
+      {t:"Me sinto confortável porque garante qualidade", dim:"C"},
+    ]},
+    { id:"B55", prompt:"Quando trabalho com alguém muito rápido, eu:", options:[
+      {t:"Me sinto bem e acelero junto", dim:"D"},
+      {t:"Aproveito para mobilizar pessoas", dim:"I"},
+      {t:"Me sinto pressionado(a) e prefiro estabilidade", dim:"S"},
+      {t:"Me preocupo com risco e padrão", dim:"C"},
+    ]},
+    { id:"B56", prompt:"Quando estou lidando com dados e métricas, eu:", options:[
+      {t:"Uso só o essencial para decidir", dim:"D"},
+      {t:"Uso para comunicar e engajar", dim:"I"},
+      {t:"Uso para manter previsibilidade e ritmo", dim:"S"},
+      {t:"Uso para validar, comparar e controlar qualidade", dim:"C"},
+    ]},
+    { id:"B57", prompt:"Se eu preciso pedir ajuda, eu:", options:[
+      {t:"Peço de forma objetiva e rápida", dim:"D"},
+      {t:"Peço conversando e criando proximidade", dim:"I"},
+      {t:"Peço com cuidado para não incomodar", dim:"S"},
+      {t:"Peço com base em critérios e contexto", dim:"C"},
+    ]},
+    { id:"B58", prompt:"Se um plano está bom, mas não perfeito, eu:", options:[
+      {t:"Executo e ajusto no caminho", dim:"D"},
+      {t:"Compartilho para ganhar adesão e energia", dim:"I"},
+      {t:"Prefiro não mexer muito e manter estabilidade", dim:"S"},
+      {t:"Prefiro refinar antes de seguir", dim:"C"},
+    ]},
+    { id:"B59", prompt:"Quando estou liderando uma ação, eu:", options:[
+      {t:"Defino direção e cobro execução", dim:"D"},
+      {t:"Engajo pessoas e mantenho o clima alto", dim:"I"},
+      {t:"Garanto suporte e continuidade do time", dim:"S"},
+      {t:"Garanto padrão, critérios e controle", dim:"C"},
+    ]},
+    { id:"B60", prompt:"Quando preciso escolher entre velocidade e qualidade, eu:", options:[
+      {t:"Tendo a escolher velocidade", dim:"D"},
+      {t:"Tendo a escolher alinhamento e adesão", dim:"I"},
+      {t:"Tendo a escolher estabilidade e segurança", dim:"S"},
+      {t:"Tendo a escolher qualidade e precisão", dim:"C"},
+    ]},
+    { id:"B61", prompt:"Se algo está indefinido, eu:", options:[
+      {t:"Defino e sigo em frente", dim:"D"},
+      {t:"Conecto pessoas para definir junto", dim:"I"},
+      {t:"Espero mais clareza para agir", dim:"S"},
+      {t:"Estabeleço critérios antes de agir", dim:"C"},
+    ]},
+    { id:"B62", prompt:"Quando preciso tomar uma decisão em grupo, eu:", options:[
+      {t:"Busco decisão rápida", dim:"D"},
+      {t:"Busco participação e energia", dim:"I"},
+      {t:"Busco consenso e tranquilidade", dim:"S"},
+      {t:"Busco dados e racionalidade", dim:"C"},
+    ]},
+    { id:"B63", prompt:"Quando recebo uma regra nova, eu:", options:[
+      {t:"Pergunto o porquê e se dá para simplificar", dim:"D"},
+      {t:"Penso em como comunicar para as pessoas", dim:"I"},
+      {t:"Quero tempo para me adaptar", dim:"S"},
+      {t:"Quero entender o critério e aplicar corretamente", dim:"C"},
+    ]},
+    { id:"B64", prompt:"Se eu tivesse que escolher o que mais me descreve no trabalho, eu diria que eu:", options:[
+      {t:"Busco impacto e avanço", dim:"D"},
+      {t:"Busco conexão e influência", dim:"I"},
+      {t:"Busco constância e suporte", dim:"S"},
+      {t:"Busco qualidade e critério", dim:"C"},
+    ]},
+  ];
+
   function render(){
-    const box = $("questoes");
+    const box = $("blocks");
     box.innerHTML = "";
-    itens.forEach((q, idx)=>{
+
+    blocks.forEach((b, idx)=>{
       const div = document.createElement("div");
-      div.className = "q";
+      div.className = "block";
+
+      const rows = b.options.map((opt, j)=>{
+        const oid = `${b.id}_O${j+1}`;
+        return `
+          <div class="row" data-dim="${opt.dim}">
+            <div class="txt">${opt.t}</div>
+            <div class="pick">
+              <label class="chip">
+                <input type="radio" name="${b.id}_MOST" value="${j}" />
+                <span>MAIS</span>
+              </label>
+              <label class="chip">
+                <input type="radio" name="${b.id}_LEAST" value="${j}" />
+                <span>MENOS</span>
+              </label>
+            </div>
+          </div>
+        `;
+      }).join("");
+
       div.innerHTML = `
-        <strong>${idx+1}. ${q.t}</strong>
-        <div class="scale" data-q="${q.id}">
-          ${[1,2,3,4,5].map(v=>`
-            <label class="chip">
-              <input type="radio" name="${q.id}" value="${v}" />
-              <span>${v}</span>
-            </label>
-          `).join("")}
-          <span class="muted">1 Discordo • 3 Neutro • 5 Concordo</span>
-        </div>
+        <strong>${idx+1}. ${b.prompt}</strong>
+        <div class="choices">${rows}</div>
+        <div class="muted">Escolha 1 como MAIS e 1 como MENOS (não pode ser a mesma).</div>
       `;
+
       box.appendChild(div);
     });
 
+    // Progresso
     box.addEventListener("change", ()=>{
-      const answered = itens.filter(q => document.querySelector(`input[name="${q.id}"]:checked`)).length;
-      const pct = Math.round((answered / itens.length) * 100);
+      const answered = blocks.filter(b => {
+        const m = document.querySelector(`input[name="${b.id}_MOST"]:checked`);
+        const l = document.querySelector(`input[name="${b.id}_LEAST"]:checked`);
+        return !!m && !!l && m.value !== l.value;
+      }).length;
+      const pct = Math.round((answered / blocks.length) * 100);
       $("prog").style.width = pct + "%";
     });
   }
 
-  function getAnswer(id){
-    const el = document.querySelector(`input[name="${id}"]:checked`);
+  function getPick(blockId, which){
+    const el = document.querySelector(`input[name="${blockId}_${which}"]:checked`);
     return el ? Number(el.value) : null;
   }
 
-  function calcScores(){
-    let sums = {D:0, I:0, S:0, C:0};
-    let counts = {D:0, I:0, S:0, C:0};
+  function score(){
+    let s = {D:0, I:0, S:0, C:0};
+    let invalid = 0;
+    let missing = 0;
 
-    for (const q of itens){
-      const a = getAnswer(q.id);
-      if (a === null) continue;
-      const val = q.reverse ? (6 - a) : a;
-      sums[q.dim] += val;
-      counts[q.dim] += 1;
+    for (const b of blocks){
+      const most = getPick(b.id, "MOST");
+      const least = getPick(b.id, "LEAST");
+
+      if (most === null || least === null){
+        missing++;
+        continue;
+      }
+      if (most === least){
+        invalid++;
+        continue;
+      }
+      const dimMost = b.options[most].dim;
+      const dimLeast = b.options[least].dim;
+
+      // Regra profissional simples e robusta:
+      // MAIS = +1 / MENOS = -1
+      s[dimMost] += 1;
+      s[dimLeast] -= 1;
     }
 
-    // valida se respondeu tudo
-    const answered = Object.values(counts).reduce((x,y)=>x+y,0);
-    if (answered < itens.length){
-      return { ok:false, msg:`Faltam ${itens.length - answered} resposta(s). Role a página e complete para ter um resultado mais fiel.` };
+    if (missing > 0 || invalid > 0){
+      return { ok:false, msg:`Você precisa completar todos os blocos. Pendências: ${missing} incompleto(s) e ${invalid} inválido(s) (MAIS e MENOS iguais).` };
     }
 
-    // normaliza para 0..100 (10 itens cada, cada item 1..5 => min 10 max 50)
+    // Normalização para 0..100 (cada dimensão varia de -N..+N, N=64)
+    const N = blocks.length;
     const norm = {};
     for (const k of ["D","I","S","C"]){
-      const min = 10, max = 50;
-      const pct = Math.round(((sums[k]-min)/(max-min))*100);
+      const pct = Math.round(((s[k] + N) / (2*N)) * 100);
       norm[k] = Math.max(0, Math.min(100, pct));
     }
 
-    // predominante
-    const top = Object.entries(norm).sort((a,b)=>b[1]-a[1])[0][0];
+    const ordered = Object.entries(norm).sort((a,b)=>b[1]-a[1]);
+    const top = ordered[0][0];
+    const second = ordered[1][0];
 
-    return { ok:true, raw:sums, norm, top };
+    // Alerta simples de “equilíbrio” (perfil pouco definido)
+    const spread = ordered[0][1] - ordered[3][1];
+
+    return { ok:true, raw:s, norm, top, second, spread };
   }
 
-  function showResult(res){
+  function show(res){
     $("resultado").style.display = "block";
-    $("perfilTop").textContent = `${res.top} (${res.norm[res.top]}%)`;
-    $("perfilDesc").textContent = descricoes[res.top];
+
+    const top = res.top;
+    const second = res.second;
+
+    $("perfilTop").textContent = profile[top].name;
+    $("perfil2").textContent = profile[second].name;
 
     $("valD").textContent = res.norm.D + "%"; $("barD").style.width = res.norm.D + "%";
     $("valI").textContent = res.norm.I + "%"; $("barI").style.width = res.norm.I + "%";
     $("valS").textContent = res.norm.S + "%"; $("barS").style.width = res.norm.S + "%";
     $("valC").textContent = res.norm.C + "%"; $("barC").style.width = res.norm.C + "%";
 
-    // guarda para enviar/copiar
+    $("descTop").innerHTML = `<b>${profile[top].desc}</b><br/><span class="muted">Secundário: ${profile[second].desc}</span>`;
+    $("dicasTop").textContent = profile[top].tips;
+
+    // Alerta de perfil muito equilibrado (não é erro, é só leitura)
+    if (res.spread < 10){
+      $("alerta").innerHTML = `<span class="warn">Leitura:</span> seu perfil apareceu bem equilibrado (diferença pequena entre os fatores). Isso pode indicar adaptação alta ao ambiente ou estilo versátil.`;
+    } else {
+      $("alerta").textContent = "";
+    }
+
     window.__last = res;
   }
 
-  function buildPayload(){
+  function payload(){
+    // respostas compactas (só índices)
     const answers = {};
-    itens.forEach(q => { answers[q.id] = getAnswer(q.id); });
-
+    blocks.forEach(b=>{
+      answers[b.id] = {
+        most: getPick(b.id, "MOST"),
+        least: getPick(b.id, "LEAST"),
+      };
+    });
     return {
       nome: $("nome").value.trim(),
       setor: $("setor").value.trim(),
       email: $("email").value.trim(),
-      data: $("data").value,
+      data: $("data").value.trim(),
       resultado: window.__last,
-      respostas: answers,
-      userAgent: navigator.userAgent
+      answers
     };
   }
 
-  async function send(){
+  async function sendIfConfigured(){
+    if (!ENDPOINT) return;
     const status = $("status");
-    status.textContent = "";
-    if (!ENDPOINT){
-      status.textContent = "ENDPOINT não configurado. Cole a URL do Apps Script no topo do arquivo (const ENDPOINT).";
-      return;
-    }
-    const payload = buildPayload();
-    if (!payload.nome || !payload.setor){
-      status.textContent = "Preencha Nome e Setor/Função antes de enviar.";
-      return;
-    }
-
     try{
       status.textContent = "Enviando…";
       const r = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(payload)
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(payload())
       });
       const txt = await r.text();
       status.textContent = r.ok ? "Enviado com sucesso ✅" : ("Erro ao enviar: " + txt);
     }catch(e){
-      status.textContent = "Falha de rede ao enviar. Tente novamente ou verifique o endpoint.";
+      status.textContent = "Falha ao enviar (rede/endpoint).";
     }
   }
 
   function copySummary(){
-    const p = buildPayload();
-    const n = window.__last?.norm;
-    const top = window.__last?.top;
+    const p = payload();
+    const n = p.resultado.norm;
+    const top = p.resultado.top;
+    const second = p.resultado.second;
+
     const text =
-`DISC - Resultado
+`DISC (Premium • Escolha Forçada)
 Nome: ${p.nome}
-Setor: ${p.setor}
+Setor/Função: ${p.setor}
 Data: ${p.data}
-D: ${n.D}% | I: ${n.I}% | S: ${n.S}% | C: ${n.C}%
-Predominante: ${top}
+
+Pontuação (normalizada):
+D: ${n.D}%  I: ${n.I}%  S: ${n.S}%  C: ${n.C}%
+
+Predominante: ${profile[top].name}
+Secundário: ${profile[second].name}
+
+Resumo:
+${profile[top].desc}
+Dica: ${profile[top].tips}
 `;
     navigator.clipboard.writeText(text).then(()=>{
       $("status").textContent = "Resumo copiado ✅";
@@ -330,17 +761,24 @@ Predominante: ${top}
     $("prog").style.width = "0%";
   }
 
-  $("btnCalcular").addEventListener("click", ()=>{
-    const res = calcScores();
+  $("btnCalcular").addEventListener("click", async ()=>{
+    const nome = $("nome").value.trim();
+    const setor = $("setor").value.trim();
+    if (!nome || !setor){
+      alert("Preencha Nome e Setor/Função antes de ver o resultado.");
+      return;
+    }
+
+    const res = score();
     if (!res.ok){
       alert(res.msg);
       return;
     }
-    showResult(res);
+    show(res);
+    await sendIfConfigured();
     window.scrollTo({top: document.body.scrollHeight, behavior:"smooth"});
   });
 
-  $("btnEnviar").addEventListener("click", send);
   $("btnCopiar").addEventListener("click", copySummary);
   $("btnLimpar").addEventListener("click", clearAll);
 
